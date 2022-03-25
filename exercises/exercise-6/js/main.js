@@ -1,5 +1,5 @@
 const fetchMovies = async () => {
-    const response = await fetch('https://api.airtable.com/v0/appxfJxfQb92yyKkg/Table%201?maxRecords=100&view=Grid%20view&api_key=keykxG25CNr82Rf9Y').then(data => data.json());
+    const response = await fetch('https://api.airtable.com/v0/appxfJxfQb92yyKkg/movies?maxRecords=100&view=Grid%20view&api_key=keykxG25CNr82Rf9Y').then(data => data.json());
 
     console.log(response);
 
@@ -13,8 +13,8 @@ const fetchMovies = async () => {
         const imdbUrlEl = document.createElement('div');
         const releaseDateEl = document.createElement('div');
 
-        titleEl.innerHTML = movie.fields.Title;
-        genreEl.innerHTML = movie.fields.Genre;
+        titleEl.innerHTML = movie.fields.title;
+        genreEl.innerHTML = movie.fields.genre;
 
         articleEl.appendChild(titleEl);
 
