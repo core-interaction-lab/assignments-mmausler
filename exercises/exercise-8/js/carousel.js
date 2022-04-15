@@ -18,21 +18,45 @@ const fetchMovies = async () => {
 };
 
 const buildSlideshow = (movies) => {
-    let leftI = 0;
-    let rightI = 6;
+    const slideCount = 3;
+    /*
+    *  Add the first 7 items from our collection array to our container:
+    *  We start with our full movies collection, call slice(0, 7) on it to trim
+    *  the array to a length of 7, and then pass the resulting array to
+    *  map. Map is a function that will run our specified function on each
+    *  item in the array passed to it. So we pass it our sliced array and
+    *  tell it to run our buildSlide function on each item. This will return
+    *  a new array that holds all of the results from buildSlide, which are
+    *  article HTML elements. So articleEls is an array of 7 article elements
+    */
+    const articleEls = movies.slice(0, slideCount).map(buildSlide);
+    // Append these 7 HTML elements to our container, the '...' syntax takes
+    // our array and turns it into a list of function arguments, so its
+    // equivalent to append(article1, article2, article3, etc...)
+    slideshowContainer.append(...articleEls);
 
-    const articles = movies.slice(0, 7).map(buildSlide);
-    slideshowContainer.append(...articles);
+    /*
+    *  Here we declare two variables using let, since we will be updating them. 
+    *  One to keep track of the index of the movie that is on the right of
+    *  of our container, and one for the left side. If we click prev we increase
+    *  both of these by 1, since we start with viewing slides 0-6, and if we
+    *  click prev we want to then be viewing slides 1-7.
+    */
+    let leftI = 0;
+    let rightI = slideCount - 1;
 
     prevButton.addEventListener('click', () => {
         leftI += 1;
         rightI += 1;
+        // If the right or left side is the last movie in our list, reset it to 0
         if (rightI >= movies.length) {
             rightI = 0;
         }
         if (leftI >= movies.length) {
             leftI = 0;
         }
+
+        // Remove the first element 
         slideshowContainer.removeChild(slideshowContainer.children[0]);
         slideshowContainer.append(buildSlide(movies[rightI]));
     });
@@ -46,7 +70,7 @@ const buildSlideshow = (movies) => {
         if (rightI < 0) {
             rightI = movies.length - 1;
         }
-        slideshowContainer.removeChild(slideshowContainer.querySelectorAll('article')[6]);
+        slideshowContainer.removeChild(slideshowContainer.querySelectorAll('article')[slideCount - 1]);
         slideshowContainer.prepend(buildSlide(movies[leftI]));
     });
 };
