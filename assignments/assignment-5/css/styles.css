@@ -1,0 +1,19 @@
+.content {
+    display: flex;
+    padding: 0 .5rem;
+}
+
+section {
+    padding: 0 .2rem;
+}
+
+.input-value {
+    display: inline-block;
+    min-width: 50px;
+    border-bottom: 1px solid black;
+}
+
+form input {
+    display: block;
+    margin-bottom: .5rem;
+}
