@@ -10,10 +10,10 @@ section {
 .input-value {
     display: inline-block;
     min-width: 50px;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 
 form input {
     display: block;
-    margin-bottom: .6rem;
+    margin-bottom: .5rem;
 }
